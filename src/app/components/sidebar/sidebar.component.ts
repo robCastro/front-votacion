@@ -9,6 +9,34 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
+    path: "/registrar",
+    title: "Nuevo Candidato",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-paper",
+    class: ""
+  },
+  {
+    path: "/crear",
+    title: "Nueva Votacion",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-notes",
+    class: ""
+  },
+  {
+    path: "/permitir",
+    title: "Permitir Votar",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-lock-circle",
+    class: ""
+  },
+  {
+    path: "/votar",
+    title: "Votar",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-tap-02",
+    class: ""
+  },
+  {
     path: "/dashboard",
     title: "Dashboard",
     rtlTitle: "لوحة القيادة",

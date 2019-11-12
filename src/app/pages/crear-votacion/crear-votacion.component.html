@@ -1,0 +1,136 @@
+<div class="content">
+	<div class="row">
+		<h3>Nueva Votaci&oacute;n</h3>
+	</div>
+	<form>
+	<!-- ROW -->
+		<div class="row">
+
+			<!-- CARD DATOS GRALES-->
+			<div class="col-md-6 px-2 py-4">
+				<div class="card">
+					<div class="card-header">
+						Datos Generales
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" id="txtNombre">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtDescripcion" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
+							<div class="col-md-7">
+								<textarea class="form-control" id="txtDescripcion"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- CARD TIPO VOTACION -->
+			<div class="col-md-6 px-2 py-4">
+				<div class="card">
+					<div class="card-header">
+						Tipo de Votaci&oacute;n
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="slcTipo" class="col-md-5 col-form-label"><strong>Tipo:</strong></label>
+							<div class="col-md-7">
+								<select id="slcTipo" class="form-control">
+									<option value="1">Absoluta</option>
+									<option value="2">Ponderada</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtDescripcionTipo" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
+							<div class="col-md-7">
+								<textarea class="form-control-plaintext" readonly id="txtDescripcionTipo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- CARD FECHA Y HORA -->
+			<div class="col-md-6 px-2 py-4">
+				<div class="card">
+					<div class="card-header">
+						Fecha y Hora
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="txtFechaI" class="col-md-5 col-form-label"><strong>Fecha de Inicio:</strong></label>
+							<div class="col-md-7">
+								<input type="date" class="form-control" id="txtFechaI">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtHoraI" class="col-md-5 col-form-label"><strong>Hora de Inicio:</strong></label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" id="txtHoraI">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtFechaF" class="col-md-5 col-form-label"><strong>Fecha de Fin:</strong></label>
+							<div class="col-md-7">
+								<input type="date" class="form-control" id="txtFechaF">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtHoraF" class="col-md-5 col-form-label"><strong>Hora de Fin:</strong></label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" id="txtHoraF">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- CARD TIPO ORDENAMIENTO -->
+			<div class="col-md-6 px-2 py-4">
+				<div class="card">
+					<div class="card-header">
+						Candidatos
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="slcTipo" class="col-md-5 col-form-label"><strong>Tipo:</strong></label>
+							<div class="col-md-7">
+								<select id="slcTipo" class="form-control">
+									<option value="1">Azar</option>
+									<option value="2">A-Z</option>
+									<option value="3">Z-A</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="txtDescripcionOrden" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
+							<div class="col-md-7">
+								<textarea class="form-control-plaintext" readonly id="txtDescripcionOrden">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	<!-- FIN ROW -->
+		<div class="row py-3">
+			<button type="button" class="btn btn-dark">Guardar</button>
+		</div>
+	</form>
+</div>

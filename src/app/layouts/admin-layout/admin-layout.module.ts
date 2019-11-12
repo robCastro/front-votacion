@@ -6,6 +6,10 @@ import { FormsModule } from "@angular/forms";
 
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
+import { RegistrarCandidatoComponent } from '../../pages/registrar-candidato/registrar-candidato.component';
+import { CrearVotacionComponent } from '../../pages/crear-votacion/crear-votacion.component';
+import { PermitirVotarComponent } from '../../pages/permitir-votar/permitir-votar.component';
+import { VotarComponent } from '../../pages/votar/votar.component';
 import { IconsComponent } from "../../pages/icons/icons.component";
 import { MapComponent } from "../../pages/map/map.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
@@ -26,6 +30,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
   ],
   declarations: [
     DashboardComponent,
+    RegistrarCandidatoComponent,
+    CrearVotacionComponent,
+    PermitirVotarComponent,
+    VotarComponent,
     UserComponent,
     TablesComponent,
     IconsComponent,
