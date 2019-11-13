@@ -1,4 +1,4 @@
-export interface Persona {
+export class Persona {
 	id_persona: number;
 	nombres_persona: string;
 	apellidos_persona: string;

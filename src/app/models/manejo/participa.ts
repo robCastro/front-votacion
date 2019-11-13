@@ -2,7 +2,7 @@ import { Mesa } from './mesa';
 import { Votante } from './votante';
 import { EstadoVoto } from './estado-voto';
 
-export interface Participa {
+export class Participa {
 	id_participa: number;
 	mesa: Mesa;
 	votante: Votante;

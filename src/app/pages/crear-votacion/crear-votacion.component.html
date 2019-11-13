@@ -38,22 +38,24 @@
 					<div class="card-body">
 						<div class="form-group row">
 							<label for="slcTipo" class="col-md-5 col-form-label"><strong>Tipo:</strong></label>
-							<div class="col-md-7">
-								<select id="slcTipo" class="form-control">
-									<option value="1">Absoluta</option>
-									<option value="2">Ponderada</option>
-								</select>
-							</div>
+						<div class="col-md-7">
+							<mat-form-field>
+								<mat-label>Tipo de Votacion</mat-label>
+								<mat-select [(ngModel)]="votacion.tipoVotacion" [(value)]="idTipoSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarDes()" name="slcTipoVotacion" required >
+									<mat-option>--</mat-option>
+									<mat-option *ngFor="let tip of tiposvotacion" [value]="tip.id_tipo_votacion"  >
+										{{tip.nombre_tipo_votacion}}
+									</mat-option>
+								</mat-select>
+								<mat-error *ngIf="crearVotacionControl.hasError('required')">Por favor escoja tipo de votacion</mat-error>
+								<mat-hint>{{crearVotacionControl.value?.descripcion_tipo_votacion}}</mat-hint>
+							</mat-form-field>
+						</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtDescripcionTipo" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
 							<div class="col-md-7">
-								<textarea class="form-control-plaintext" readonly id="txtDescripcionTipo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+								<textarea class="form-control-plaintext" readonly id="txtDescripcionTipo">{{des}}</textarea>
 							</div>
 						</div>
 					</div>
@@ -105,12 +107,18 @@
 						<div class="form-group row">
 							<label for="slcTipo" class="col-md-5 col-form-label"><strong>Tipo:</strong></label>
 							<div class="col-md-7">
-								<select id="slcTipo" class="form-control">
-									<option value="1">Azar</option>
-									<option value="2">A-Z</option>
-									<option value="3">Z-A</option>
-								</select>
-							</div>
+							<!--<mat-form-field>
+								<mat-label>Tipo de Votacion</mat-label>
+								<mat-select [(ngModel)]="votacion.tipoVotacion.id_votacion" [formControl]="crearVotacionControl" name="slcTipoVotacion" required>
+									<mat-option>--</mat-option>
+									<mat-option *ngFor="let tip of tiposVotacion" [value]="tip.id_votacion">
+										{{tip.nombre_tipo_votacion}}
+									</mat-option>
+								</mat-select>
+								<mat-error *ngIf="crearVotacionControl.hasError('required')">Por favor escoja tipo de votacion</mat-error>
+								<mat-hint>{{crearVotacionControl.value?.descripcion_tipo_votacion}}</mat-hint>
+							</mat-form-field>-->
+						</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtDescripcionOrden" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>

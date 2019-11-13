@@ -1,4 +1,4 @@
-export interface Votante {
+export class Votante {
 	id_votante: number;
 	nombre_votante: string;
 	carnet_votante: string;
