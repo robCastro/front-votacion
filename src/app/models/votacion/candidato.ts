@@ -9,6 +9,6 @@ export class Candidato {
 	apellidos_candidato:string;
 	carnet_candidato: string;
 	apodo_candidato: string;
-	url_foto_candidato: string;
+	url_foto_candidato: File;
 	id_persona: number;
 }
