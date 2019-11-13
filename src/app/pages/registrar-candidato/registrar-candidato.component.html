@@ -4,75 +4,94 @@
 	</div>
 	<form>
 	<!-- ROW -->
-		<div class="row">
+	<div class="row">
 
-			<!-- CARD BUSCAR-->
-			<div class="col-md-6 px-2 py-4">
-				<div class="card">
-					<div class="card-header card-header-warning">
-						Candidato
+		<!-- CARD BUSCAR-->
+		<div class="col-md-6 px-2 py-4">
+			<div class="card">
+				<div class="card-header card-header-warning">
+					Candidato
+				</div>
+				<div class="card-body">
+					<div class="form-group row">
+						<label for="txtBuscar" class="col-md-3 col-form-label"><strong>Carnet:</strong></label>
+						<div class="col-md-5">
+							<input type="text" class="form-control" id="txtBuscar">
+						</div>
+						<div class="col-md-4">
+							<button type="button" class="btn btn-primary">Buscar</button>
+						</div>
 					</div>
-					<div class="card-body">
-						<div class="form-group row">
-							<label for="txtBuscar" class="col-md-5 col-form-label"><strong>Buscar:</strong></label>
-							<div class="col-md-7">
-								<input type="text" class="form-control" id="txtBuscar">
-							</div>
+					<div class="form-group row">
+						<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
+						<div class="col-md-7">
+							<input type="text" id="txtNombre" readonly class="form-control-plaintext" value="Nombre Completo Candidato">
 						</div>
-						<div class="form-group row">
-							<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
-							<div class="col-md-7">
-								<input type="text" id="txtNombre" readonly class="form-control-plaintext" value="Nombre Completo Candidato">
-							</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtIdentificador" class="col-md-5 col-form-label"><strong>Identificador:</strong></label>
+						<div class="col-md-7">
+							<input type="text" id="txtIdentificador" readonly class="form-control-plaintext" value="Identificador de Empresa de Cand">
 						</div>
-						<div class="form-group row">
-							<label for="txtIdentificador" class="col-md-5 col-form-label"><strong>Identificador:</strong></label>
-							<div class="col-md-7">
-								<input type="text" id="txtIdentificador" readonly class="form-control-plaintext" value="Identificador de Empresa de Cand">
-							</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtFechaNac" class="col-md-5 col-form-label"><strong>Fecha de Nacimiento:</strong></label>
+						<div class="col-md-7">
+							<input type="text" id="txtFechaNac" readonly class="form-control-plaintext" value="dd/mm/aaaa">
 						</div>
-						<div class="form-group row">
-							<label for="txtFechaNac" class="col-md-5 col-form-label"><strong>Fecha de Nacimiento:</strong></label>
-							<div class="col-md-7">
-								<input type="text" id="txtFechaNac" readonly class="form-control-plaintext" value="dd/mm/aaaa">
-							</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtBuscar" class="col-md-5 col-form-label"><strong>Afiliacion:</strong></label>
+						<div class="col-md-7">
+							<mat-form-field>
+								<mat-label>Afiliacion</mat-label>
+								<mat-select [(ngModel)]="seleccionAfiliacion" [formControl]="afiliacionControl" name="slcAfiliacion" required>
+									<mat-option>--</mat-option>
+									<mat-option *ngFor="let afiliacion of afiliaciones" [value]="afiliacion.id_afiliacion">
+										{{afiliacion.nombre_afiliacion}}
+									</mat-option>
+								</mat-select>
+								<mat-error *ngIf="afiliacionControl.hasError('required')">Por favor escoja afiliacion</mat-error>
+								<mat-hint>{{afiliacionControl.value?.descripcion_afiliacion}}</mat-hint>
+							</mat-form-field>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- CARD IMAGEM -->
-			<div class="col-md-6 px-2 py-4">
-				<div class="card">
-					<div class="card-header">
-						Imagen
-					</div>
-					<div class="card-body">
-						<div class="form-group row">
-							<div class="custom-file">
-	  							<input type="file" class="custom-file-input" id="customFile">
-							  	<label class="custom-file-label" for="customFile">Choose file</label>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="txtDescripcionTipo" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
-							<div class="col-md-7">
-								<textarea class="form-control-plaintext" readonly id="txtDescripcionTipo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
+		
+		<!-- CARD IMAGEM -->
+		<div class="col-md-6 px-2 py-4">
+			<div class="card">
+				<div class="card-header">
+					Imagen
+				</div>
+				<div class="card-body">
+					<div class="form-group row">
+						<div class="custom-file">
+  							<input type="file" class="custom-file-input" id="customFile">
+						  	<label class="custom-file-label" for="customFile">Choose file</label>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtDescripcionTipo" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
+						<div class="col-md-7">
+							<textarea class="form-control-plaintext" readonly id="txtDescripcionTipo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 	<!-- FIN ROW -->
-		<div class="row py-3">
-			<button type="button" class="btn btn-dark">Guardar</button>
-		</div>
+	<div class="row py-3">
+		<button type="button" class="btn btn-dark">Guardar</button>
+	</div>
 	</form>
 </div>

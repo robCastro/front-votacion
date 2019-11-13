@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import * as url from './url_back';
 
 
 import { Afiliacion } from '../../models/votacion/afiliacion';
@@ -9,15 +11,15 @@ import { Afiliacion } from '../../models/votacion/afiliacion';
   providedIn: 'root'
 })
 export class AfiliacionService {
-	private urlEndPoint: string = 'http://localhost:3003/api/votacion/afiliacion';
 	private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
-	
+	private urlBase = url.produccion;
 
-	constructor() { }
+	constructor(private http: HttpClient) { }
 
 
 	public getAfiliaciones(): Observable<Afiliacion[]>{
-		return this.http.get(this.urlEndPointTodos).pipe(
+		console.log(this.urlBase);
+		return this.http.get(`${this.urlBase}/afiliacion`).pipe(
 			map( response => response as Afiliacion[])
 		);
 	}
