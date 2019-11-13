@@ -14,45 +14,57 @@
 				</div>
 				<div class="card-body">
 					<div class="form-group row">
-						<label for="txtBuscar" class="col-md-3 col-form-label"><strong>Carnet:</strong></label>
+						<label for="carnetBuscar" class="col-md-3 col-form-label"><strong>Carnet:</strong></label>
 						<div class="col-md-5">
-							<input type="text" class="form-control" id="txtBuscar">
+							<input type="text" class="form-control" name="carnetBuscar" required [(ngModel)]="carnetBuscar">
 						</div>
 						<div class="col-md-4">
-							<button type="button" class="btn btn-primary">Buscar</button>
+							<button type="button" (click)="buscar()" class="btn btn-primary">Buscar</button>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
+						<label for="candidatoNombre" class="col-md-3 col-form-label"><strong>Nombre:</strong></label>
 						<div class="col-md-7">
-							<input type="text" id="txtNombre" readonly class="form-control-plaintext" value="Nombre Completo Candidato">
+							<input type="text" name="candidatoNombre" [(ngModel)]="candidato.nombres_candidato"  readonly class="form-control-plaintext" value="Nombre Completo Candidato">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="txtIdentificador" class="col-md-5 col-form-label"><strong>Identificador:</strong></label>
+						<label for="candidatoApellido" class="col-md-3 col-form-label"><strong>Apellido:</strong></label>
 						<div class="col-md-7">
-							<input type="text" id="txtIdentificador" readonly class="form-control-plaintext" value="Identificador de Empresa de Cand">
+							<input type="text" name="candidatoApellido" [(ngModel)]="candidato.apellidos_candidato"  readonly class="form-control-plaintext" value="Nombre Completo Candidato">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="txtFechaNac" class="col-md-5 col-form-label"><strong>Fecha de Nacimiento:</strong></label>
+						<label for="candidatoCarnet" class="col-md-3 col-form-label"><strong>Identificador:</strong></label>
 						<div class="col-md-7">
-							<input type="text" id="txtFechaNac" readonly class="form-control-plaintext" value="dd/mm/aaaa">
+							<input type="text" name="candidatoCarnet" [(ngModel)]="candidato.carnet_candidato" readonly class="form-control-plaintext" value="Identificador de Empresa de Cand">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="txtBuscar" class="col-md-5 col-form-label"><strong>Afiliacion:</strong></label>
+						<label for="txtFechaNac" class="col-md-3 col-form-label"><strong>Fecha de Nacimiento:</strong></label>
 						<div class="col-md-7">
+							<input type="date" name="personaFechaNac" [(ngModel)]="persona.fecha_nacimiento_persona" readonly class="form-control-plaintext">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="candidatoApodo" class="col-md-3 col-form-label"><strong>Apodo:</strong></label>
+						<div class="col-md-7">
+							<input type="text" name="candidatoApodo" [(ngModel)]="candidato.apodo_candidato" placeholder="Se mostrará en papeleta electronica" class="form-control-plaintext" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtBuscar" class="col-md-3 col-form-label"><strong>Afiliacion:</strong></label>
+						<div class="col-md-7">	
 							<mat-form-field>
 								<mat-label>Afiliacion</mat-label>
-								<mat-select [(ngModel)]="seleccionAfiliacion" [formControl]="afiliacionControl" name="slcAfiliacion" required>
+								<mat-select [(ngModel)]="candidato.afiliacion.id_afiliacion" [formControl]="requeridosControl" name="slcAfiliacion" required>
 									<mat-option>--</mat-option>
 									<mat-option *ngFor="let afiliacion of afiliaciones" [value]="afiliacion.id_afiliacion">
 										{{afiliacion.nombre_afiliacion}}
 									</mat-option>
 								</mat-select>
-								<mat-error *ngIf="afiliacionControl.hasError('required')">Por favor escoja afiliacion</mat-error>
-								<mat-hint>{{afiliacionControl.value?.descripcion_afiliacion}}</mat-hint>
+								<mat-error *ngIf="requeridosControl.hasError('required')">Por favor escoja afiliacion</mat-error>
+								<mat-hint>{{requeridosControl.value?.descripcion_afiliacion}}</mat-hint>
 							</mat-form-field>
 						</div>
 					</div>

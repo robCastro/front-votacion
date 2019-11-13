@@ -1,7 +1,7 @@
 import { Candidato } from './candidato';
 import { Mesa } from './mesa';
 
-export interface Conteo {
+export class Conteo {
 	id_conteo: number;
 	candidato: Candidato;
 	mesa: Mesa;

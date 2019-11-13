@@ -1,4 +1,4 @@
-export interface Nivel {
+export class Nivel {
 	id_nivel: number;
 	padre?: Nivel;
 	nombre_nivel: string;

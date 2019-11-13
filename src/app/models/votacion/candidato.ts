@@ -1,7 +1,7 @@
 import { Afiliacion } from './afiliacion';
 import { Votacion } from './votacion';
 
-export interface Candidato {
+export class Candidato {
 	id_candidato: number;
 	afiliacion: Afiliacion
 	votacion: Votacion;

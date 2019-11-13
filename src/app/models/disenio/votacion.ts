@@ -1,7 +1,7 @@
 import { TipoVotacion } from './tipo-votacion';
 import { Ordenamiento } from './ordenamiento';
 
-export interface Votacion {
+export class Votacion {
 	id_votacion: number;
 	tipoVotacion: TipoVotacion;
 	ordenamiento: Ordenamiento;

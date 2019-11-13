@@ -1,4 +1,4 @@
-export interface Mesa {
+export class Mesa {
 	id_mesa: number;
 	id_votacion: number;
 	id_centro_votacion: number;

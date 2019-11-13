@@ -1,6 +1,6 @@
 import { Votacion } from './votacion';
 import { CentroVotacion } from './centro-votacion';
-export interface Mesa {
+export class Mesa {
 	id_mesa: number;
 	votacion: Votacion;
 	centroVotacion: CentroVotacion;
