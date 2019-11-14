@@ -107,28 +107,23 @@
 						<div class="form-group row">
 							<label for="slcTipo" class="col-md-5 col-form-label"><strong>Tipo:</strong></label>
 							<div class="col-md-7">
-							<!--<mat-form-field>
-								<mat-label>Tipo de Votacion</mat-label>
-								<mat-select [(ngModel)]="votacion.tipoVotacion.id_votacion" [formControl]="crearVotacionControl" name="slcTipoVotacion" required>
+							<mat-form-field>
+								<mat-label>Ordenamiento</mat-label>
+								<mat-select [(ngModel)]="votacion.ordenamiento" [(value)]="idOrdeSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarOrde()" name="slcOrdenamiento" required >
 									<mat-option>--</mat-option>
-									<mat-option *ngFor="let tip of tiposVotacion" [value]="tip.id_votacion">
-										{{tip.nombre_tipo_votacion}}
+									<mat-option *ngFor="let or of ordenamientos" [value]="or.id_ordenamiento"  >
+										{{or.nombre_ordenamiento}}
 									</mat-option>
 								</mat-select>
-								<mat-error *ngIf="crearVotacionControl.hasError('required')">Por favor escoja tipo de votacion</mat-error>
-								<mat-hint>{{crearVotacionControl.value?.descripcion_tipo_votacion}}</mat-hint>
-							</mat-form-field>-->
+								<mat-error *ngIf="crearVotacionControl.hasError('required')">Por favor escoja tipo de Ordenamiento</mat-error>
+								<mat-hint>{{crearVotacionControl.value?.descripcion_ordenamiento}}</mat-hint>
+							</mat-form-field>
 						</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtDescripcionOrden" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
 							<div class="col-md-7">
-								<textarea class="form-control-plaintext" readonly id="txtDescripcionOrden">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiumdod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+								<textarea class="form-control-plaintext" readonly id="txtDescripcionOrden">{{desOrde}}</textarea>
 							</div>
 						</div>
 					</div>

@@ -4,6 +4,9 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { TipoVotacionService } from 'src/app/service/DisenioVotacion/tipo-votacion.service';
 import  {TipoVotacion} from 'src/app/models/disenio/tipo-votacion';
 import  {Votacion} from 'src/app/models/disenio/votacion';
+import  {Ordenamiento} from 'src/app/models/disenio/ordenamiento';
+import {OrdenamientoVotacionService} from 'src/app/service/DisenioVotacion/ordenamiento-votacion.service';
+import {ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-crear-votacion',
@@ -16,7 +19,12 @@ export class CrearVotacionComponent implements OnInit {
 	public votacion:Votacion= new Votacion();
 	public idTipoSeleccionado: string;
 	public des:string;
-  constructor(private tipoVotacionService:TipoVotacionService) { }
+  public idOrdeSeleccionado: string;
+  public desOrde:string;
+  public ordenamientos:Ordenamiento[];
+
+  constructor(private tipoVotacionService:TipoVotacionService, private ordenamientoService:OrdenamientoVotacionService,
+    private cdref: ChangeDetectorRef) { }
 
   ngOnInit() {
   	this.tipoVotacionService.getTipoVotacion().subscribe(TVotacion=>{
@@ -26,7 +34,11 @@ export class CrearVotacionComponent implements OnInit {
   	this.votacion.tipoVotacion = new TipoVotacion();
   	this.des="";
 
-
+     this.ordenamientoService.getOrdenamiento().subscribe(TOrde=>{
+      this.ordenamientos=TOrde;
+      console.log(this.ordenamientos);
+    });
+     this.cdref.detectChanges();//funcion para que no marque error al cambio de las funciones cambiarDes y cambiarOrde
   }
 
 
@@ -42,6 +54,20 @@ export class CrearVotacionComponent implements OnInit {
   			break;
   		}
   	}
+  }
+
+    cambiarOrde():void{
+    let i: number = 0;
+    if(!this.idOrdeSeleccionado){
+      this.desOrde = "";
+      return;
+    }
+    for(i; i < this.ordenamientos.length; i++){
+      if(this.ordenamientos[i].id_ordenamiento === parseInt(this.idOrdeSeleccionado)){
+        this.desOrde = this.ordenamientos[i].descripcion_ordenamiento;
+        break;
+      }
+    }
   }
 
 }
