@@ -27,6 +27,6 @@ export class CandidatoService {
 	    formData.append('id_persona', candidato.id_persona.toString());
 	    console.log(formData);
 		//return this.http.post(`${this.urlBase}candidato`, formData, {headers: this.httpHeaders});
-		return this.http.post(`${this.urlBase}candidato`, formData);
+		return this.http.post(`${this.urlBase}candidato`, formData) as Observable<boolean>;
 	}
 }

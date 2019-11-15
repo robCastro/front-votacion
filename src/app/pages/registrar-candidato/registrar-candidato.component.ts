@@ -42,35 +42,26 @@ export class RegistrarCandidatoComponent implements OnInit {
 
 	public buscar(){
 		if(this.carnetBuscar){
-			this.personaService.getPersonaPorCarnet('carnet',this.carnetBuscar).subscribe(persona => {
-				if(persona !== null){
-					this.candidato.nombres_candidato = persona.nombres_persona;
-					this.candidato.apellidos_candidato = persona.apellidos_persona;
-					this.candidato.id_persona = persona.id_persona;
-					this.candidato.carnet_candidato = persona.carnet_organizacion_persona;
-					this.persona = persona;
-					console.log('Persona ')
-					console.log(this.persona)
-					console.log('Candidato ')
-					console.log(this.candidato)
+			this.personaService.getPersonaPorCarnet('carnet',this.carnetBuscar).subscribe(
+				persona => {
+					if(persona !== null){
+						this.candidato.nombres_candidato = persona.nombres_persona;
+						this.candidato.apellidos_candidato = persona.apellidos_persona;
+						this.candidato.id_persona = persona.id_persona;
+						this.candidato.carnet_candidato = persona.carnet_organizacion_persona;
+						this.persona = persona;
+					}
+					else{
+						this.displayError({error:{msg:'Esta persona no esta registrada'}});
+					}
+				},
+				err => {
+					this.displayError(err);
 				}
-				else{
-					Swal.fire({
-						title: 'Error!',
-						text: 'Esta persona no esta registrada',
-						icon: 'error',
-						confirmButtonText: 'Ok'
-					});
-				}
-			});
+			);
 		}	
 		else{
-			Swal.fire({
-				title: 'Error!',
-				text: 'Especifique carnet',
-				icon: 'error',
-				confirmButtonText: 'Ok'
-			});
+			this.displayError({error:{msg:'Especifique carnet'}});
 		}
 	}
 
@@ -80,24 +71,49 @@ export class RegistrarCandidatoComponent implements OnInit {
 	}
 
 	public guardar(){
-		this.candidatoService.postCandidato(this.candidato).subscribe(candidato => {
-			if(candidato !== null){
-				Swal.fire({
-					title: 'Guardado!',
-					text: 'Candidato Guardado correctamente',
-					icon: 'success',
-					confirmButtonText: 'OK'
-				});
+		// https://stackoverflow.com/questions/35326689/how-to-catch-exception-correctly-from-http-request
+		let errores: string[] = [];
+		if(typeof this.candidato.votacion === 'undefined') errores.push('Falta Votacion');
+		if(typeof this.candidato.id_persona === 'undefined') errores.push('Buscar al candidato por carnet');
+		if(typeof this.candidato.apodo_candidato === 'undefined') errores.push('Especificar un apodo para candidato');
+		if(typeof this.candidato.afiliacion.id_afiliacion === 'undefined') errores.push('Escoger una Afiliacion');	
+		if(typeof this.candidato.url_foto_candidato === 'undefined') errores.push('Escoger una Imagen');
+		if(errores.length > 0){
+			let msg = "Por favor:<br>"
+			for (var i = 0; i < errores.length; i++) {
+				msg = msg + (i+1).toString() + ") " + errores[i] + "<br>";
 			}
-			else{
-				Swal.fire({
-					title: 'Error!',
-					text: 'Ocurrió un Error Guardando el Candidato, intente de nuevo',
-					icon: 'warning',
-					confirmButtonText: 'OK'
-				});
+			this.displayError({error:{msg:msg}});	
+			return;	
+		}
+		this.candidatoService.postCandidato(this.candidato).subscribe(
+			candidato => {
+				if(candidato !== null){
+					Swal.fire({
+						title: 'Guardado!',
+						text: 'Candidato Guardado correctamente',
+						icon: 'success',
+						confirmButtonText: 'OK'
+					});
+				}
+				else{
+					this.displayError({error:{msg:'Ocurrió un Error Guardando el Candidato, intente de nuevo'}});
+				}
+			}, err => {
+				this.displayError(err);
 			}
-		});
+		);
 	}
 
+	private displayError(err: any){
+		let msg = "";
+		err.error.msg ? msg = err.error.msg : msg = err.message;
+		Swal.fire({
+			title: '<strong>Error!</strong>',
+			html: msg,
+			icon: 'error',
+			confirmButtonText: 'OK'
+		});
+		console.log(err);
+	}
 }
