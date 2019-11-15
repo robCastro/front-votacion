@@ -112,7 +112,6 @@ export class RegistrarCandidatoComponent implements OnInit {
 		let msg = "";
 		err.error.msg ? msg = err.error.msg : msg = err.message;
 		Swal.fire({
-			position: 'top-start',
 			title: '<strong>Error!</strong>',
 			html: msg,
 			icon: 'error',
