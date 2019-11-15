@@ -32,15 +32,18 @@ export class RegistrarCandidatoComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		this.displayProcesando(true);
 		this.candidato.afiliacion = new Afiliacion();
 		this.candidato.votacion = new Votacion(); // SUSTITUIR ESTO CON GET VOTACION
 		this.candidato.votacion.id_votacion = 1; // SUSTITUIR ESTO CON GET VOTACION
 		this.afiliacionService.getAfiliaciones().subscribe(afiliaciones => {
 			this.afiliaciones = afiliaciones;
+			this.displayProcesando(false);
 		});
 	}
 
 	public buscar(){
+		this.displayProcesando(true);
 		if(this.carnetBuscar){
 			this.personaService.getPersonaPorCarnet('carnet',this.carnetBuscar).subscribe(
 				persona => {
@@ -109,11 +112,32 @@ export class RegistrarCandidatoComponent implements OnInit {
 		let msg = "";
 		err.error.msg ? msg = err.error.msg : msg = err.message;
 		Swal.fire({
+			position: 'top-start',
 			title: '<strong>Error!</strong>',
 			html: msg,
 			icon: 'error',
 			confirmButtonText: 'OK'
 		});
 		console.log(err);
+	}
+
+	private displayProcesando(abrir: boolean){
+		setTimeout(function(){
+			console.log('asd');
+		}, 3000);
+		if(abrir){
+			Swal.fire({
+				position: 'top-end',
+				title: 'Procesando',
+				html: '...',
+				icon: 'info',
+				showConfirmButton: false,
+				allowOutsideClick: false,
+  				allowEscapeKey: false,
+			});
+		}
+		else{
+			Swal.close();
+		}
 	}
 }
