@@ -16,13 +16,13 @@
 						<div class="form-group row">
 							<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
 							<div class="col-md-7">
-								<input type="text" class="form-control" id="txtNombre">
+								<input type="text" name="votacionNombre" [(ngModel)]="votacion.nombre_votacion" class="form-control">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtDescripcion" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
 							<div class="col-md-7">
-								<textarea class="form-control" id="txtDescripcion"></textarea>
+								<textarea class="form-control" name="DesVotacion" [(ngModel)]="votacion.descripcion_votacion"></textarea>
 							</div>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 						<div class="col-md-7">
 							<mat-form-field>
 								<mat-label>Tipo de Votacion</mat-label>
-								<mat-select [(ngModel)]="votacion.tipoVotacion" [(value)]="idTipoSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarDes()" name="slcTipoVotacion" required >
+								<mat-select [(ngModel)]="votacion.tipoVotacion.id_tipo_votacion" [(value)]="idTipoSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarDes()" name="slcTipoVotacion" required >
 									<mat-option>--</mat-option>
 									<mat-option *ngFor="let tip of tiposvotacion" [value]="tip.id_tipo_votacion"  >
 										{{tip.nombre_tipo_votacion}}
@@ -72,25 +72,25 @@
 						<div class="form-group row">
 							<label for="txtFechaI" class="col-md-5 col-form-label"><strong>Fecha de Inicio:</strong></label>
 							<div class="col-md-7">
-								<input type="date" class="form-control" id="txtFechaI">
+								<input type="date" class="form-control" name="fechaIni" [(ngModel)]="votacion.fecha_inicio_votacion">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtHoraI" class="col-md-5 col-form-label"><strong>Hora de Inicio:</strong></label>
 							<div class="col-md-7">
-								<input type="text" class="form-control" id="txtHoraI">
+								<input type="time" class="form-control" name="horaIni" [(ngModel)]="horaInicio">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtFechaF" class="col-md-5 col-form-label"><strong>Fecha de Fin:</strong></label>
 							<div class="col-md-7">
-								<input type="date" class="form-control" id="txtFechaF">
+								<input type="date" class="form-control" name="fechafin" [(ngModel)]="votacion.fecha_fin_votacion">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtHoraF" class="col-md-5 col-form-label"><strong>Hora de Fin:</strong></label>
 							<div class="col-md-7">
-								<input type="text" class="form-control" id="txtHoraF">
+								<input type="time" class="form-control" name="horafin" [(ngModel)]="horaFin">
 							</div>
 						</div>
 					</div>
@@ -109,7 +109,7 @@
 							<div class="col-md-7">
 							<mat-form-field>
 								<mat-label>Ordenamiento</mat-label>
-								<mat-select [(ngModel)]="votacion.ordenamiento" [(value)]="idOrdeSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarOrde()" name="slcOrdenamiento" required >
+								<mat-select [(ngModel)]="votacion.ordenamiento.id_ordenamiento" [(value)]="idOrdeSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarOrde()" name="slcOrdenamiento" required >
 									<mat-option>--</mat-option>
 									<mat-option *ngFor="let or of ordenamientos" [value]="or.id_ordenamiento"  >
 										{{or.nombre_ordenamiento}}
@@ -133,7 +133,7 @@
 		</div>
 	<!-- FIN ROW -->
 		<div class="row py-3">
-			<button type="button" class="btn btn-dark">Guardar</button>
+			<button type="button" (click)="guardar()" class="btn btn-dark">Guardar</button>
 		</div>
 	</form>
 </div>

@@ -7,6 +7,8 @@ import  {Votacion} from 'src/app/models/disenio/votacion';
 import  {Ordenamiento} from 'src/app/models/disenio/ordenamiento';
 import {OrdenamientoVotacionService} from 'src/app/service/DisenioVotacion/ordenamiento-votacion.service';
 import {ChangeDetectorRef } from '@angular/core';
+import Swal from 'sweetalert2'
+import {VotacionService} from 'src/app/service/DisenioVotacion/votacion.service';
 
 @Component({
   selector: 'app-crear-votacion',
@@ -22,9 +24,11 @@ export class CrearVotacionComponent implements OnInit {
   public idOrdeSeleccionado: string;
   public desOrde:string;
   public ordenamientos:Ordenamiento[];
+  public horaInicio:Date;
+  public horaFin:Date;
 
   constructor(private tipoVotacionService:TipoVotacionService, private ordenamientoService:OrdenamientoVotacionService,
-    private cdref: ChangeDetectorRef) { }
+    private cdref: ChangeDetectorRef,private votacionService:VotacionService) { }
 
   ngOnInit() {
   	this.tipoVotacionService.getTipoVotacion().subscribe(TVotacion=>{
@@ -32,6 +36,7 @@ export class CrearVotacionComponent implements OnInit {
   		console.log(this.tiposvotacion);
   	});
   	this.votacion.tipoVotacion = new TipoVotacion();
+    this.votacion.ordenamiento = new Ordenamiento();
   	this.des="";
 
      this.ordenamientoService.getOrdenamiento().subscribe(TOrde=>{
@@ -69,5 +74,27 @@ export class CrearVotacionComponent implements OnInit {
       }
     }
   }
+
+  public guardar(){
+    this.votacionService.postVotacion(this.votacion,this.horaInicio,this.horaFin).subscribe(votacion => {
+      if(votacion!== null){
+        Swal.fire({
+          title: 'Guardado!',
+          text: 'Votacion Guardada correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+      else{
+        Swal.fire({
+          title: 'Error!',
+          text: 'Ocurrió un Error Guardando de la Votacion, intente de nuevo',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  }
+
 
 }
