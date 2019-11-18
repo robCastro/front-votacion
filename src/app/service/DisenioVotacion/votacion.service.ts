@@ -17,12 +17,15 @@ export class VotacionService {
   constructor(private http: HttpClient) { }
 
   public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
+  		//console.log(votacion);
   		console.log(votacion.tipoVotacion.id_tipo_votacion.toString());
   		console.log(votacion.ordenamiento.id_ordenamiento.toString());
   		this.fecha_inicio_votacion=`${votacion.fecha_inicio_votacion.toString()}T${hInicio.toString()}:00.000Z`;
   		this.fecha_fin_votacion=`${votacion.fecha_fin_votacion.toString()}T${hFin.toString()}:00.000Z`;
-
-	    const formData: FormData = new FormData();
+  		votacion.fecha_inicio_votacion = new Date(this.fecha_inicio_votacion);
+  		votacion.fecha_fin_votacion = new Date(this.fecha_fin_votacion);
+  		console.log(votacion);
+	    /*const formData: FormData = new FormData();
 	    formData.append('id_tipo_votacion', votacion.tipoVotacion.id_tipo_votacion.toString().replace(/ /g, ""));
 	    formData.append('id_ordenamiento', votacion.ordenamiento.id_ordenamiento.toString().replace(/ /g, ""));
 	    formData.append('fecha_inicio_votacion', this.fecha_inicio_votacion);
@@ -30,8 +33,8 @@ export class VotacionService {
 	    formData.append('nombre_votacion', votacion.nombre_votacion);
 	    formData.append('descripcion_votacion', votacion.descripcion_votacion);
 	    console.log(formData);
-		
-		return this.http.post(`${this.urlBase}votaciones`, formData) as Observable<boolean>;
+		*/
+		return this.http.post(`${this.urlBase}votaciones`, votacion) as Observable<boolean>;
 };
 	}
 
