@@ -9,14 +9,14 @@ import  {Votacion} from 'src/app/models/disenio/votacion';
   providedIn: 'root'
 })
 export class VotacionService {
-	private urlBase = url.produccion;
+	private urlBase = url.desarrollo;
 	public fecha_inicio_votacion:string;
 	public fecha_fin_votacion:string;
 
 
   constructor(private http: HttpClient) { }
 
-  public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
+	public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
   		//console.log(votacion);
   		console.log(votacion.tipoVotacion.id_tipo_votacion.toString());
   		console.log(votacion.ordenamiento.id_ordenamiento.toString());
@@ -35,7 +35,12 @@ export class VotacionService {
 	    console.log(formData);
 		*/
 		return this.http.post(`${this.urlBase}votaciones`, votacion) as Observable<boolean>;
-};
+	};
+
+
+	public getVotacion(id: number): Observable<Votacion>{
+		return this.http.get(`${this.urlBase}votaciones/${id}`) as Observable<Votacion>
 	}
+}
 
 
