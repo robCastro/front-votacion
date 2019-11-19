@@ -1,5 +1,25 @@
 <div class="content">
-	<h2>
-	  Por la puchica Roberto, hace esta pantalla
-	</h2>	
+	<div class="row">
+		<h2>Mesas para Votación</h2>
+	</div>
+	<div *ngFor="let mesa of mesas" class="row pl-3 mx-auto">
+		<h4 class="">Mesa #{{mesa.numero_mesa}}</h4>
+		<table class="table" >
+			<thead>
+				<th>Nombre</th>
+				<th>Carnet</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let votante of votantes">
+					<td>{{votante.nombre_votante}}</td>
+					<td>{{votante.carnet_votante}}</td>
+				</tr>
+			</tbody>
+			
+		</table>
+		
+	</div>
+	<div class="row" #elseBlock>
+		
+	</div>
 </div>
