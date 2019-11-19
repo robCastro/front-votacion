@@ -7,6 +7,7 @@ import { VotacionService as VotacionDisenioService } from '../../service/Disenio
 import { VotacionService as VotacionVotacionService } from '../../service/votacion/votacion.service';
 import { VigilanteService } from '../../service/ManejoMesas/vigilante.service';
 import { MesaService } from '../../service/ManejoMesas/mesa.service';
+import { SocketService } from '../../service/socket.service'
 
 
 import { Votacion as VotacionDisenio } from '../../models/disenio/votacion';
@@ -35,6 +36,7 @@ export class PermitirVotarComponent implements OnInit {
 		private votacionVotacionService: VotacionVotacionService,
 		private vigilanteService: VigilanteService,
 		private mesaService: MesaService,
+		private socketService: SocketService
 	) { }
 
 	ngOnInit() {
@@ -54,6 +56,7 @@ export class PermitirVotarComponent implements OnInit {
 											this.votantes = votantes;
 										else
 											this.votantes.concat(votantes);
+										this.socketService.emit('connection', null);
 									}, err3 => {
 										if(err3.status === 404)
 											this.displayError(err3)
