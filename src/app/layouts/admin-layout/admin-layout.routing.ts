@@ -17,7 +17,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "registrar", component: RegistrarCandidatoComponent },
   { path: "crear", component: CrearVotacionComponent },
-  { path: "permitir/:id_vot/:id_vig", component: PermitirVotarComponent },
+  { path: "permitir", component: PermitirVotarComponent },
   { path: "votar", component: VotarComponent },
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapComponent },

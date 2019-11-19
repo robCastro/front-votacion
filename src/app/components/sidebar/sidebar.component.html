@@ -12,10 +12,20 @@
   <ul class="nav">
     <li
       routerLinkActive="active"
+      
+      class="nav-item"
+    >
+      <a routerLink="/permitir">
+        <i class="tim-icons icon-lock-circle"></i>
+        <p>Permitir</p>
+      </a>
+    </li>
+    <li
+      routerLinkActive="active"
       *ngFor="let menuItem of menuItems"
       class="{{ menuItem.class }} nav-item"
     >
-      <a [routerLink]="[menuItem.path, menuItem.params1, menuItem.params2]">
+      <a [routerLink]="[menuItem.path]">
         <i class="tim-icons  {{ menuItem.icon }}"></i>
         <p>{{ menuItem.title }}</p>
       </a>

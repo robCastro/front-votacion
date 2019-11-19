@@ -42,7 +42,7 @@ export class PermitirVotarComponent implements OnInit {
 	ngOnInit() {
 		this.displayProcesando(true);
 
-		this.route.paramMap.subscribe(params =>{
+		this.route.queryParamMap.subscribe(params =>{
 			this.vigilanteService.getVigilante(parseInt(params.get('id_vig'))).subscribe(
 				vigilante => {
 					this.vigilante = vigilante;
