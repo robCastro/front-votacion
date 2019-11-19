@@ -39,6 +39,11 @@ export class PermitirVotarComponent implements OnInit {
 		private socketService: SocketService
 	) { }
 
+	public desbloquear(){
+		console.log('abrir');
+		this.socketService.emit('abrir', this.mesas[0].id_mesa)
+	}
+
 	ngOnInit() {
 		this.displayProcesando(true);
 
