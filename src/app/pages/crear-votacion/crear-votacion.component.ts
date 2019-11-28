@@ -17,6 +17,7 @@ import {VotacionService} from 'src/app/service/DisenioVotacion/votacion.service'
 })
 export class CrearVotacionComponent implements OnInit {
 	public crearVotacionControl = new FormControl('', [Validators.required]);
+  public crearVotacionControl1 = new FormControl('', [Validators.required]);
 	public tiposvotacion: TipoVotacion[];
 	public votacion:Votacion= new Votacion();
 	public idTipoSeleccionado: string;
@@ -76,25 +77,55 @@ export class CrearVotacionComponent implements OnInit {
   }
 
   public guardar(){
-    this.votacionService.postVotacion(this.votacion,this.horaInicio,this.horaFin).subscribe(votacion => {
-      if(votacion!== null){
-        Swal.fire({
-          title: 'Guardado!',
-          text: 'Votacion Guardada correctamente',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      }
-      else{
-        Swal.fire({
-          title: 'Error!',
-          text: 'Ocurrió un Error Guardando de la Votacion, intente de nuevo',
-          icon: 'warning',
-          confirmButtonText: 'OK'
-        });
-      }
-    });
+    if(this.votacion.fecha_fin_votacion==this.votacion.fecha_inicio_votacion&& this.horaInicio>=this.horaFin){
+      Swal.fire({
+      title: 'Error',
+      text: 'Hora de fin debe ser mayor a la hora de inicio',
+      icon: 'error',
+      confirmButtonText: 'OK'
+      });
+    }
+    else if(this.votacion.fecha_inicio_votacion>this.votacion.fecha_fin_votacion){
+      Swal.fire({
+      title: 'Error',
+      text: 'Fecha de fin debe ser mayor a la fecha de inicio',
+      icon: 'error',
+      confirmButtonText: 'OK'
+      });
+    }  
+    else{
+      this.votacionService.postVotacion(this.votacion,this.horaInicio,this.horaFin).subscribe(
+        votacion => {
+          if(votacion !== null){
+            Swal.fire({
+              title: 'Guardado!',
+              text: 'Votacion Guardada correctamente',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+          }
+          else{
+            this.displayError({error:{msg:'Ocurrió un Error Guardando la votacion, intente de nuevo'}});
+          }
+        }, err => {
+          this.displayError(err);
+          }
+      );
+    }
   }
+
+  private displayError(err: any){
+    let msg = "";
+    err.error.msg ? msg = err.error.msg : msg = err.message;
+    Swal.fire({
+      title: '<strong>Error!</strong>',
+      html: msg,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+    console.log(err);
+  }
+
 
 
 }

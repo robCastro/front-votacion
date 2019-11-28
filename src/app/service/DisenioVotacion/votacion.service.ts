@@ -17,7 +17,7 @@ export class VotacionService {
   constructor(private http: HttpClient) { }
 
   public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
-  		//console.log(votacion);
+  		console.log(votacion.fecha_inicio_votacion.toString());
   		console.log(votacion.tipoVotacion.id_tipo_votacion.toString());
   		console.log(votacion.ordenamiento.id_ordenamiento.toString());
   		this.fecha_inicio_votacion=`${votacion.fecha_inicio_votacion.toString()}T${hInicio.toString()}:00.000Z`;

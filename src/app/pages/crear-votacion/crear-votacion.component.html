@@ -16,13 +16,23 @@
 						<div class="form-group row">
 							<label for="txtNombre" class="col-md-5 col-form-label"><strong>Nombre:</strong></label>
 							<div class="col-md-7">
-								<input type="text" name="votacionNombre" [(ngModel)]="votacion.nombre_votacion" class="form-control">
+								<input type="text" name="votacionNombre" [(ngModel)]="votacion.nombre_votacion" class="form-control" required #nombre="ngModel">
+								<div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                    				<div *ngIf="nombre.errors.required">
+                      					Nombre de la votación es requrida
+                    				</div>
+                  				</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtDescripcion" class="col-md-5 col-form-label"><strong>Descripci&oacute;n:</strong></label>
 							<div class="col-md-7">
-								<textarea class="form-control" name="DesVotacion" [(ngModel)]="votacion.descripcion_votacion"></textarea>
+								<textarea class="form-control" name="DesVotacion" [(ngModel)]="votacion.descripcion_votacion" required #desc="ngModel"></textarea>
+								<div class="alert alert-danger" *ngIf="desc.invalid && (desc.dirty || desc.touched)">
+                    				<div *ngIf="desc.errors.required">
+                      					Descripción de la votación es requrida
+                    				</div>
+                  				</div>
 							</div>
 						</div>
 					</div>
@@ -41,13 +51,13 @@
 						<div class="col-md-7">
 							<mat-form-field>
 								<mat-label>Tipo de Votacion</mat-label>
-								<mat-select [(ngModel)]="votacion.tipoVotacion.id_tipo_votacion" [(value)]="idTipoSeleccionado" [formControl]="crearVotacionControl" (selectionChange)="cambiarDes()" name="slcTipoVotacion" required >
+								<mat-select [(ngModel)]="votacion.tipoVotacion.id_tipo_votacion" [(value)]="idTipoSeleccionado" [formControl]="crearVotacionControl1" (selectionChange)="cambiarDes()" name="slcTipoVotacion" required >
 									<mat-option>--</mat-option>
 									<mat-option *ngFor="let tip of tiposvotacion" [value]="tip.id_tipo_votacion"  >
 										{{tip.nombre_tipo_votacion}}
 									</mat-option>
 								</mat-select>
-								<mat-error *ngIf="crearVotacionControl.hasError('required')">Por favor escoja tipo de votacion</mat-error>
+								<mat-error *ngIf="crearVotacionControl1.hasError('required')">Por favor escoja tipo de votacion</mat-error>
 								<mat-hint>{{crearVotacionControl.value?.descripcion_tipo_votacion}}</mat-hint>
 							</mat-form-field>
 						</div>
@@ -72,25 +82,46 @@
 						<div class="form-group row">
 							<label for="txtFechaI" class="col-md-5 col-form-label"><strong>Fecha de Inicio:</strong></label>
 							<div class="col-md-7">
-								<input type="date" class="form-control" name="fechaIni" [(ngModel)]="votacion.fecha_inicio_votacion">
+								<input type="date" class="form-control" name="fechaIni" [(ngModel)]="votacion.fecha_inicio_votacion" required #fechaI="ngModel">
+								<div class="alert alert-danger" *ngIf="fechaI.invalid && (fechaI.dirty || fechaI.touched)">
+                    				<div *ngIf="fechaI.errors.required">
+                      					La fecha de inicio es requrida
+                    				</div>
+                  				</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtHoraI" class="col-md-5 col-form-label"><strong>Hora de Inicio:</strong></label>
 							<div class="col-md-7">
-								<input type="time" class="form-control" name="horaIni" [(ngModel)]="horaInicio">
+								<input type="time" class="form-control" name="horaIni" [(ngModel)]="horaInicio" required #horaI="ngModel">
+								<div class="alert alert-danger" *ngIf="horaI.invalid && (horaI.dirty || horaI.touched)">
+                    				<div *ngIf="horaI.errors.required">
+                      					La hora de inicio es requrida
+                    				</div>
+                  				</div>
+
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtFechaF" class="col-md-5 col-form-label"><strong>Fecha de Fin:</strong></label>
 							<div class="col-md-7">
-								<input type="date" class="form-control" name="fechafin" [(ngModel)]="votacion.fecha_fin_votacion">
+								<input type="date" class="form-control" name="fechafin" [(ngModel)]="votacion.fecha_fin_votacion" required #fechaF="ngModel">
+								<div class="alert alert-danger" *ngIf="fechaF.invalid && (fechaF.dirty || fechaF.touched)">
+                    				<div *ngIf="fechaF.errors.required">
+                      					La fecha de finalización es requrida
+                    				</div>
+                  				</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="txtHoraF" class="col-md-5 col-form-label"><strong>Hora de Fin:</strong></label>
 							<div class="col-md-7">
-								<input type="time" class="form-control" name="horafin" [(ngModel)]="horaFin">
+								<input type="time" class="form-control" name="horafin" [(ngModel)]="horaFin" required #horaF="ngModel">
+								<div class="alert alert-danger" *ngIf="horaF.invalid && (horaF.dirty || horaF.touched)">
+                    				<div *ngIf="horaF.errors.required">
+                      					La hora de finalización es requrida
+                    				</div>
+                  				</div>
 							</div>
 						</div>
 					</div>
@@ -133,7 +164,7 @@
 		</div>
 	<!-- FIN ROW -->
 		<div class="row py-3">
-			<button type="button" (click)="guardar()" class="btn btn-dark">Guardar</button>
+			<button type="button" (click)="guardar()" class="btn btn-dark" [disabled]="nombre.invalid || desc.invalid || fechaI.invalid || fechaF.invalid || horaI.invalid || horaF.invalid || crearVotacionControl.invalid">Guardar</button>
 		</div>
 	</form>
 </div>
