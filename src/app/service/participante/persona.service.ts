@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 
 
 import { Persona } from '../../models/registro/persona';
@@ -12,7 +12,7 @@ import { Persona } from '../../models/registro/persona';
 })
 export class PersonaService {
 	private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
-	private urlBase = url.produccion;
+	private urlBase = url.produccion + 'registro_participantes/';
 
 	constructor(private http: HttpClient) { }
 

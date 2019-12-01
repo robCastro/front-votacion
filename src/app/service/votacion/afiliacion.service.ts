@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 
 
 import { Afiliacion } from '../../models/votacion/afiliacion';
@@ -11,7 +11,7 @@ import { Afiliacion } from '../../models/votacion/afiliacion';
   providedIn: 'root'
 })
 export class AfiliacionService {
-	private urlBase = url.produccion;
+	private urlBase = url.produccion + 'votacion/';
 
 	constructor(private http: HttpClient) { }
 

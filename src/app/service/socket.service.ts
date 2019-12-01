@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-
-
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
+
+import * as urls from './url_gateway';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class SocketService {
 
 	socket: any;
-	readonly uri: string = "ws://192.168.78.84:3004";
+	readonly uri: string = urls.wsProduccion;
 
 	constructor() {
 		this.socket = io(this.uri);

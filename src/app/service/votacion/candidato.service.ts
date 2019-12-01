@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 
 import { Candidato } from '../../models/votacion/candidato';
 
@@ -10,7 +10,7 @@ import { Candidato } from '../../models/votacion/candidato';
   providedIn: 'root'
 })
 export class CandidatoService {
-	private urlBase = url.desarrollo;
+	private urlBase = url.produccion + 'votacion/';
 	private httpHeaders = new HttpHeaders({'Content-Type':'multipart/form-data'});
 
 	constructor(private http: HttpClient) { }

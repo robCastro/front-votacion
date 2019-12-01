@@ -27,8 +27,12 @@ export class CrearVotacionComponent implements OnInit {
   public horaInicio:Date;
   public horaFin:Date;
 
-  constructor(private tipoVotacionService:TipoVotacionService, private ordenamientoService:OrdenamientoVotacionService,
-    private cdref: ChangeDetectorRef,private votacionService:VotacionService) { }
+  constructor(
+    private tipoVotacionService:TipoVotacionService, 
+    private ordenamientoService:OrdenamientoVotacionService,
+    private cdref: ChangeDetectorRef,
+    private votacionService:VotacionService
+  ) { }
 
   ngOnInit() {
   	this.tipoVotacionService.getTipoVotacion().subscribe(TVotacion=>{

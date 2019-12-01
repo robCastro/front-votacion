@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 
 
 import { Votacion } from '../../models/votacion/votacion';
@@ -10,7 +10,7 @@ import { Votacion } from '../../models/votacion/votacion';
   providedIn: 'root'
 })
 export class VotacionService {
-	private urlBase = url.desarrollo;
+	private urlBase = url.produccion + 'votacion/';
 
 	constructor(
 		private http: HttpClient,

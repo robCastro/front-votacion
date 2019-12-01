@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 
 import { Mesa } from '../../models/disenio/mesa';
 
@@ -9,7 +9,7 @@ import { Mesa } from '../../models/disenio/mesa';
   providedIn: 'root'
 })
 export class MesaService {
-	private urlBase = url.desarrollo;
+	private urlBase = url.produccion + 'diseniovotacion/';
 
 	constructor(
 		private http: HttpClient,
