@@ -1,9 +1,17 @@
 {
-  "name": "black-dashboard-angular",
+  "name": "front-votacion",
   "version": "1.0.0",
   "description": "Black Dasboard Angular, a Creative Tim Desgin. Coded by Creative Tim",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+
+    "__Comment": "Para produccion",
+    "start": "node server.js",
+    "postinstall": "ng build --aot --prod",
+    "__Comment": "Fin Para produccion"
+
+
   },
   "repository": {
     "type": "git",
@@ -68,7 +76,9 @@
     "@ng-bootstrap/ng-bootstrap": "4.2.1",
     "chart.js": "2.8.0",
     "core-js": "3.1.4",
+    "express": "^4.17.1",
     "ngx-toastr": "10.0.4",
+    "path": "^0.12.7",
     "rxjs": "6.5.2",
     "socket.io-client": "^2.3.0",
     "sweetalert2": "^9.3.6",
@@ -95,5 +105,10 @@
     "ts-node": "8.3.0",
     "tslint": "5.17.0",
     "typescript": "3.4.5"
+  },
+  "__Comment": "Para Produccion tambien",
+  "engines": {
+    "node": "~12.13.1",
+    "npm": "~6.12.1"
   }
 }
