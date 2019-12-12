@@ -39,26 +39,27 @@ export class VotarComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.displayProcesando(true);
+		//this.displayProcesando(true);
+		this.displayBloqueado(true);
 		this.determineLocalIp();
 		this.mesaService.getMesaPorIp(this.localIp).subscribe(
 			mesa => {
 				this.id_mesa = mesa[0].id_mesa;
 				console.log('id_mesa: ', this.id_mesa);
-				//this.displayBloqueado(true);
 			}, err => {
 				this.displayError(err);
 			}
 		);
 		this.socketService.emit('connection',null);
 		this.socketService.listen('desbloquear').subscribe((data:any)=>{
-			console.log("recibido")
+			console.log("recibido");
+			console.log(data);
 			if(this.id_mesa===data)
 				this.displayBloqueado(false);
 		});
 		this.votacionService.getCandidatos(1).subscribe((candidatos:Candidato[]) => {
 			this.candidatos = candidatos;
-			this.displayProcesando(false);
+			//this.displayProcesando(false);
 		})
 	}
 
@@ -67,15 +68,22 @@ export class VotarComponent implements OnInit {
 	private votar(id_candidato: number){
 		// Aqui arriba crear y validar participacion
 		// Mejor no, mejor en gateway
+		this.displayProcesando(true);
 		this.conteoService.putConteoKafka(id_candidato, this.id_mesa).subscribe(
 			respuesta => {
+				// display bloqueado hasta que hayan pasado 3 segundos
+				this.displayBloqueado(true, 3002);
 				Swal.fire({
 					title: 'Guardado!',
 					text: 'Voto guardado',
 					icon: 'success',
-					confirmButtonText: 'OK'
+					showConfirmButton: false,
+					allowOutsideClick: false,
+	  				allowEscapeKey: false,
+					timer: 3000,
+					timerProgressBar: true
 				});
-				// Crear Participacion aqui
+				
 			},
 			err => {
 				this.displayError(err);
@@ -85,21 +93,30 @@ export class VotarComponent implements OnInit {
 	}
 
 	private anular(anular:boolean){
-		// Verificar participacion aqui 
+		// Verificar y crear participacion aqui 
 		// Mejor no, validar en gateway
+		console.log('anular');
+		this.displayProcesando(true);
 		this.mesaService.anularVoto(this.id_mesa, anular).subscribe(
 			respuesta => {
+				// display bloqueado hasta que hayan pasado 3 segundos
+				this.displayBloqueado(true, 3002);
 				let msj = "";
 				anular ? msj = "Voto Anulado" : msj = "Abstencion registrada";
 				Swal.fire({
 					title: 'Guardado!',
 					text: msj,
 					icon: 'success',
-					confirmButtonText: 'OK'
+					showConfirmButton: false,
+					allowOutsideClick: false,
+	  				allowEscapeKey: false,
+					timer: 3000,
+					timerProgressBar: true
 				});
-				// Crear Participacion aqui
+				
 			}, err => {
 				this.displayError(err);
+				console.log(err);
 			}
 		);
 	}
@@ -136,19 +153,34 @@ export class VotarComponent implements OnInit {
 		}
 	}
 
-	private displayBloqueado(bloquear: boolean){
-		if(bloquear){
-			Swal.fire({
-				title: 'Bloqueado',
-				html: 'Pasar a mesa',
-				icon: 'warning',
-				showConfirmButton: false,
-				allowOutsideClick: false,
-  				allowEscapeKey: false,
-			});	
+	private displayBloqueado(bloquear: boolean, retardo?:number){
+		console.log(!isNaN(retardo), retardo);
+		if(!isNaN(retardo) && bloquear){
+			setTimeout(function(){
+				Swal.fire({
+					title: 'Bloqueado',
+					html: 'Pasar a mesa',
+					icon: 'warning',
+					showConfirmButton: false,
+					allowOutsideClick: false,
+	  				allowEscapeKey: false,
+				});	
+			}, retardo)
 		}
 		else{
-			Swal.close();
+			if(bloquear){
+				Swal.fire({
+					title: 'Bloqueado',
+					html: 'Pasar a mesa',
+					icon: 'warning',
+					showConfirmButton: false,
+					allowOutsideClick: false,
+	  				allowEscapeKey: false,
+				});	
+			}
+			else{
+				Swal.close();
+			}
 		}
 	}
 
