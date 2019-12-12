@@ -18,7 +18,7 @@ export class AfiliacionService {
 
 	public getAfiliaciones(): Observable<Afiliacion[]>{
 		console.log(this.urlBase);
-		return this.http.get(`${this.urlBase}/afiliacion`).pipe(
+		return this.http.get(`${this.urlBase}afiliacion`).pipe(
 			map( response => response as Afiliacion[])
 		);
 	}

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from '../url_gateway';
+//import * as url from '../url_gateway';
+import * as url from './url_back';
 
 import { Candidato } from '../../models/votacion/candidato';
 
@@ -10,13 +11,14 @@ import { Candidato } from '../../models/votacion/candidato';
   providedIn: 'root'
 })
 export class CandidatoService {
-	private urlBase = url.produccion + 'votacion/';
+	//private urlBase = url.produccion + 'votacion/';
+	private urlBase = url.produccion
 	private httpHeaders = new HttpHeaders({'Content-Type':'multipart/form-data'});
 
 	constructor(private http: HttpClient) { }
 
 	public postCandidato(candidato: Candidato): Observable<boolean>{
-	    const formData: FormData = new FormData();
+	    let formData: FormData = new FormData();
 	    formData.append('id_afiliacion', candidato.afiliacion.id_afiliacion.toString());
 	    formData.append('id_votacion', candidato.votacion.id_votacion.toString());
 	    formData.append('nombres_candidato', candidato.nombres_candidato);
@@ -26,6 +28,7 @@ export class CandidatoService {
 	    formData.append('foto', candidato.url_foto_candidato);
 	    formData.append('id_persona', candidato.id_persona.toString());
 	    console.log(formData);
+	    console.log(`${this.urlBase}candidato`)
 		//return this.http.post(`${this.urlBase}candidato`, formData, {headers: this.httpHeaders});
 		return this.http.post(`${this.urlBase}candidato`, formData) as Observable<boolean>;
 	}

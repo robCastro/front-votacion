@@ -53,6 +53,7 @@ export class RegistrarCandidatoComponent implements OnInit {
 						this.candidato.id_persona = persona.id_persona;
 						this.candidato.carnet_candidato = persona.carnet_organizacion_persona;
 						this.persona = persona;
+						this.displayProcesando(false);
 					}
 					else{
 						this.displayError({error:{msg:'Esta persona no esta registrada'}});
@@ -89,6 +90,7 @@ export class RegistrarCandidatoComponent implements OnInit {
 			this.displayError({error:{msg:msg}});	
 			return;	
 		}
+		console.log(this.candidato);
 		this.candidatoService.postCandidato(this.candidato).subscribe(
 			candidato => {
 				if(candidato !== null){
@@ -121,9 +123,6 @@ export class RegistrarCandidatoComponent implements OnInit {
 	}
 
 	private displayProcesando(abrir: boolean){
-		setTimeout(function(){
-			console.log('asd');
-		}, 3000);
 		if(abrir){
 			Swal.fire({
 				position: 'top-end',
