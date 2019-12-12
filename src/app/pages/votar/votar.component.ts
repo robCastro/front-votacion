@@ -4,8 +4,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { SocketService } from '../../service/socket.service';
 import { MesaService } from '../../service/DisenioVotacion/mesa.service';
+import { ConteoService } from '../../service/votacion/conteo.service';
+import { VotacionService } from '../../service/votacion/votacion.service';
 
-
+import { Candidato } from '../../models/votacion/candidato';
 
 declare global {
 	interface Window {
@@ -25,33 +27,84 @@ export class VotarComponent implements OnInit {
 	private id_mesa:number;
 	private localIp = sessionStorage.getItem('LOCAL_IP');
 	private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
+	public candidatos = [];
 
 
 	constructor(private socketService: SocketService,
 				private route: ActivatedRoute,
 				private zone: NgZone,
 				private mesaService: MesaService,
+				private conteoService: ConteoService,
+				private votacionService: VotacionService,
 	) { }
 
 	ngOnInit() {
-		this.displayBloqueado(true);
+		this.displayProcesando(true);
 		this.determineLocalIp();
 		this.mesaService.getMesaPorIp(this.localIp).subscribe(
 			mesa => {
 				this.id_mesa = mesa[0].id_mesa;
-				console.log(this.id_mesa);
+				console.log('id_mesa: ', this.id_mesa);
+				//this.displayBloqueado(true);
 			}, err => {
 				this.displayError(err);
 			}
 		);
 		this.socketService.emit('connection',null);
 		this.socketService.listen('desbloquear').subscribe((data:any)=>{
-			console.log(data);
 			console.log("recibido")
 			if(this.id_mesa===data)
 				this.displayBloqueado(false);
+		});
+		this.votacionService.getCandidatos(1).subscribe((candidatos:Candidato[]) => {
+			this.candidatos = candidatos;
+			this.displayProcesando(false);
 		})
 	}
+
+
+
+	private votar(id_candidato: number){
+		// Aqui arriba crear y validar participacion
+		// Mejor no, mejor en gateway
+		this.conteoService.putConteoKafka(id_candidato, this.id_mesa).subscribe(
+			respuesta => {
+				Swal.fire({
+					title: 'Guardado!',
+					text: 'Voto guardado',
+					icon: 'success',
+					confirmButtonText: 'OK'
+				});
+				// Crear Participacion aqui
+			},
+			err => {
+				this.displayError(err);
+				console.log(err);
+			}
+		);
+	}
+
+	private anular(anular:boolean){
+		// Verificar participacion aqui 
+		// Mejor no, validar en gateway
+		this.mesaService.anularVoto(this.id_mesa, anular).subscribe(
+			respuesta => {
+				let msj = "";
+				anular ? msj = "Voto Anulado" : msj = "Abstencion registrada";
+				Swal.fire({
+					title: 'Guardado!',
+					text: msj,
+					icon: 'success',
+					confirmButtonText: 'OK'
+				});
+				// Crear Participacion aqui
+			}, err => {
+				this.displayError(err);
+			}
+		);
+	}
+
+
 
 	private displayError(err: any){
 		console.log(err);
@@ -98,6 +151,8 @@ export class VotarComponent implements OnInit {
 			Swal.close();
 		}
 	}
+
+
 
 
 

@@ -18,4 +18,11 @@ export class MesaService {
 	public getMesaPorIp(ip: string): Observable<Mesa>{
 		return this.http.get(`${this.urlBase}mesas?ip=${ip}`) as Observable<Mesa>;
 	}
+
+	public anularVoto(id_mesa: number, anular:boolean): Observable<boolean>{
+		return this.http.put(
+			`${this.urlBase}mesas/${id_mesa}/anular`,
+			{anular: anular}
+		) as Observable<boolean>
+	}
 }
