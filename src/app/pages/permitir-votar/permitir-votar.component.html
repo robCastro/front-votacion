@@ -8,16 +8,18 @@
 			<thead>
 				<th>Nombre</th>
 				<th>Carnet</th>
+				<th>Votar</th>
 			</thead>
 			<tbody>
 				<tr *ngFor="let votante of votantes">
 					<td>{{votante.nombre_votante}}</td>
 					<td>{{votante.carnet_votante}}</td>
+					<td><button class="btn btn-primary" (click)="desbloquear(mesa.id_mesa, votante.id_votante)">Desbloquear</button></td>
 				</tr>
 			</tbody>
 			
 		</table>
-		<button class="btn btn-primary" (click)="desbloquear(mesa.id_mesa)">Desbloquear</button>
+		
 	</div>
 	<div class="row" #elseBlock>
 		

@@ -27,6 +27,7 @@ export class VotarComponent implements OnInit {
 	private id_mesa:number;
 	private localIp = sessionStorage.getItem('LOCAL_IP');
 	private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
+	private id_votante: number = null;
 	public candidatos = [];
 
 
@@ -51,11 +52,13 @@ export class VotarComponent implements OnInit {
 			}
 		);
 		this.socketService.emit('connection',null);
-		this.socketService.listen('desbloquear').subscribe((data:any)=>{
+		this.socketService.listen('desbloquear').subscribe((mensaje:any)=>{
 			console.log("recibido");
-			console.log(data);
-			if(this.id_mesa===data)
+			console.log(mensaje);
+			if(this.id_mesa===mensaje.id_mesa){
 				this.displayBloqueado(false);
+				this.id_votante = mensaje.id_votante;
+			}
 		});
 		this.votacionService.getCandidatos(1).subscribe((candidatos:Candidato[]) => {
 			this.candidatos = candidatos;
@@ -83,11 +86,12 @@ export class VotarComponent implements OnInit {
 					timer: 3000,
 					timerProgressBar: true
 				});
-				
+				this.id_votante = null;
 			},
 			err => {
 				this.displayError(err);
 				console.log(err);
+				this.id_votante = null;
 			}
 		);
 	}
@@ -113,10 +117,11 @@ export class VotarComponent implements OnInit {
 					timer: 3000,
 					timerProgressBar: true
 				});
-				
+				this.id_votante = null;
 			}, err => {
 				this.displayError(err);
 				console.log(err);
+				this.id_votante = null;
 			}
 		);
 	}
