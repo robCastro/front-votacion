@@ -68,7 +68,7 @@ export class VotarComponent implements OnInit {
 
 
 
-	private votar(id_candidato: number){
+	public votar(id_candidato: number){
 		// Aqui arriba crear y validar participacion
 		// Mejor no, mejor en gateway
 		this.displayProcesando(true);
@@ -96,7 +96,7 @@ export class VotarComponent implements OnInit {
 		);
 	}
 
-	private anular(anular:boolean){
+	public anular(anular:boolean){
 		// Verificar y crear participacion aqui 
 		// Mejor no, validar en gateway
 		console.log('anular');
