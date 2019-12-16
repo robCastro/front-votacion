@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 import  {Votacion} from 'src/app/models/disenio/votacion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VotacionService {
-	private urlBase = url.produccion;
+	private urlBase = url.produccion + 'diseniovotacion/';
 	public fecha_inicio_votacion:string;
 	public fecha_fin_votacion:string;
 
 
   constructor(private http: HttpClient) { }
 
-  public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
-  		console.log(votacion.fecha_inicio_votacion.toString());
+	public postVotacion(votacion: Votacion, hInicio:Date, hFin:Date): Observable<boolean>{
+  		//console.log(votacion);
   		console.log(votacion.tipoVotacion.id_tipo_votacion.toString());
   		console.log(votacion.ordenamiento.id_ordenamiento.toString());
   		this.fecha_inicio_votacion=`${votacion.fecha_inicio_votacion.toString()}T${hInicio.toString()}:00.000Z`;
@@ -35,7 +35,12 @@ export class VotacionService {
 	    console.log(formData);
 		*/
 		return this.http.post(`${this.urlBase}votaciones`, votacion) as Observable<boolean>;
-};
+	};
+
+
+	public getVotacion(id: number): Observable<Votacion>{
+		return this.http.get(`${this.urlBase}votaciones/${id}`) as Observable<Votacion>
 	}
+}
 
 

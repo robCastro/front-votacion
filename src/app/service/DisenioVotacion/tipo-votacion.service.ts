@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as url from './url_back';
+import * as url from '../url_gateway';
 import  {TipoVotacion} from '../../models/disenio/tipo-votacion';
 
 
@@ -12,7 +12,7 @@ import  {TipoVotacion} from '../../models/disenio/tipo-votacion';
 })
 export class TipoVotacionService {
 	private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
-	private urlBase = url.produccion;
+	private urlBase = url.produccion + 'diseniovotacion/';
 
   constructor(private http: HttpClient) { }
 

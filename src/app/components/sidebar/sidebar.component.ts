@@ -6,6 +6,8 @@ declare interface RouteInfo {
   rtlTitle: string;
   icon: string;
   class: string;
+  params1?: string;
+  params2?: string;
 }
 export const ROUTES: RouteInfo[] = [
   {
@@ -27,7 +29,9 @@ export const ROUTES: RouteInfo[] = [
     title: "Permitir Votar",
     rtlTitle: "لوحة القيادة",
     icon: "icon-lock-circle",
-    class: ""
+    class: "",
+    params1: "1",
+    params2: "1",
   },
   {
     path: "/votar",
