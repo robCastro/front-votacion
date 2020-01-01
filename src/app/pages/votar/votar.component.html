@@ -14,7 +14,7 @@
 			<div class="col-md-4 px-2 py-4" *ngFor="let candidato of candidatos">
 				<a (click)="votar(candidato.id_candidato)">
 					<div class="card">
-						<img src="./img/example.png" class="card-img-top" alt="...">
+						<img src="https://microsvotacion.herokuapp.com{{candidato.url_foto_candidato}}" class="card-img-top" alt="...">
 						<div class="card-body">
 							<div class="form-group row">
 								<label class="col-md-4 col-form-label"><strong>Nombre:</strong></label>

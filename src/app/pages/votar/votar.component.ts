@@ -62,6 +62,7 @@ export class VotarComponent implements OnInit {
 		});
 		this.votacionService.getCandidatos(1).subscribe((candidatos:Candidato[]) => {
 			this.candidatos = candidatos;
+			console.log(this.candidatos);
 			//this.displayProcesando(false);
 		})
 	}
